@@ -1,0 +1,33 @@
+# CrewAI Dependencies
+crewai==0.1.26
+crewai-tools==0.0.15
+
+# LangChain
+langchain==0.1.0
+langchain-openai==0.0.5
+
+# LLM Providers
+openai==1.12.0
+
+# Tools
+google-search-results==2.4.2
+requests==2.31.0
+beautifulsoup4==4.12.3
+
+# Environment & Config
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Web Interface
+streamlit==1.31.0
+plotly==5.18.0
+
+# Utilities
+pydantic==2.6.0
+
+# Testing
+pytest==8.0.0
+pytest-cov==4.1.0
+
+# Development
+black==24.1.1

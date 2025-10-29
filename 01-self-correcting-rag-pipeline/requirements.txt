@@ -1,0 +1,38 @@
+# Core LangChain Dependencies
+langchain==0.1.0
+langchain-community==0.0.13
+langchain-openai==0.0.5
+
+# Vector Store & Embeddings
+faiss-cpu==1.7.4
+sentence-transformers==2.3.1
+
+# Document Processing
+pypdf==3.17.4
+python-docx==1.1.0
+unstructured==0.12.0
+
+# LLM Providers
+openai==1.12.0
+
+# Environment & Configuration
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Web Interface
+streamlit==1.31.0
+plotly==5.18.0
+
+# Utilities
+tiktoken==0.6.0
+tenacity==8.2.3
+
+# Testing
+pytest==8.0.0
+pytest-cov==4.1.0
+pytest-asyncio==0.23.4
+
+# Development
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0

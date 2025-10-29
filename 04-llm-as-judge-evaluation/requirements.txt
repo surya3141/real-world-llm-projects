@@ -1,0 +1,18 @@
+# LangChain and OpenAI
+langchain==0.1.0
+langchain-openai==0.0.2
+openai==1.10.0
+
+# UI
+streamlit==1.31.0
+
+# Utilities
+python-dotenv==1.0.0
+pydantic==2.5.3
+
+# Data processing
+pandas==2.2.0
+numpy==1.26.3
+
+# JSON handling
+jsonlines==4.0.0
