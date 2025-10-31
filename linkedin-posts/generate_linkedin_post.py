@@ -93,7 +93,7 @@ class LinkedInPostGenerator:
         
         for pattern in problem_patterns:
             matches = re.findall(pattern, self.article_content, re.IGNORECASE)
-            # Filter for complete sentences (20-200 chars, ends with period/punctuation)
+            # Filter for reasonable length text, avoiding markdown headers and formatting
             filtered = [m.strip() for m in matches 
                        if 20 < len(m.strip()) < 200 
                        and not m.strip().startswith('#')
@@ -232,7 +232,9 @@ What's your experience with this? Share your thoughts below! 👇
 
 **📊 Article Stats:**
 """
-        post += f"- Read Time: {self.metadata['estimated_read_time']} minutes\n"
+        read_time = self.metadata['estimated_read_time']
+        time_unit = "minute" if read_time == 1 else "minutes"
+        post += f"- Read Time: {read_time} {time_unit}\n"
         post += "- Level: [Beginner/Intermediate/Advanced]\n"
         post += f"- Focus: {self.metadata['title']}\n\n"
         
