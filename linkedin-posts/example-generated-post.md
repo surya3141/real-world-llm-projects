@@ -15,23 +15,23 @@
 
 I just published a comprehensive article on Medium exploring:
 
-🔍 **The Problem It Solves**
+🔍 **AI industry problem**
 
-💡 **AI industry problem**
+💡 **Example in Action**
 
-⚡ **The Promise of RAG**
+⚡ **Performance Impact**
 
-🎯 **The Reality**
+🎯 **The Problem It Solves**
 
-📈 **How It Works**
+📈 **Flaw #1: Retrieval Noise**
 
-🚀 **Flaw #1: Retrieval Noise**
+🚀 **The Promise of RAG**
 
 **Key Results:**
 
 ✅ 85% - My Implementation Journey*
 ✅ 5% (rarely filters out relevant docs)
-✅ 42% | 6% | **85% reduction** |
+✅ 85% reduction**
 
 **My Key Insight:**
 

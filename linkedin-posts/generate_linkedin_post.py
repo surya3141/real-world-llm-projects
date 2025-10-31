@@ -5,6 +5,15 @@ LinkedIn Post Generator for Medium Articles
 This script helps generate LinkedIn posts from Medium articles by extracting
 key information and providing a structured template for post creation.
 
+IMPORTANT: This tool creates a DRAFT that requires customization. The extraction
+is intentionally kept simple to avoid over-processing. Always review and customize
+the generated content, especially:
+- Hook (first 2-3 lines)
+- Problem and solution statements
+- Key insights
+- Discussion questions
+- Hashtags
+
 Usage:
     python generate_linkedin_post.py <article_path> [options]
     
@@ -84,7 +93,12 @@ class LinkedInPostGenerator:
         
         for pattern in problem_patterns:
             matches = re.findall(pattern, self.article_content, re.IGNORECASE)
-            problems.extend([m.strip() for m in matches if len(m.strip()) > 20])
+            # Filter for complete sentences (20-200 chars, ends with period/punctuation)
+            filtered = [m.strip() for m in matches 
+                       if 20 < len(m.strip()) < 200 
+                       and not m.strip().startswith('#')
+                       and not m.strip().startswith('*')]
+            problems.extend(filtered)
         
         return problems[:4]  # Return first 4 problems
     
@@ -102,7 +116,12 @@ class LinkedInPostGenerator:
         
         for pattern in solution_patterns:
             matches = re.findall(pattern, self.article_content, re.IGNORECASE)
-            solutions.extend([m.strip() for m in matches if len(m.strip()) > 20])
+            # Filter for complete sentences
+            filtered = [m.strip() for m in matches 
+                       if 20 < len(m.strip()) < 200
+                       and not m.strip().startswith('#')
+                       and not m.strip().startswith('*')]
+            solutions.extend(filtered)
         
         return solutions[:4]  # Return first 4 solutions
     
@@ -110,17 +129,29 @@ class LinkedInPostGenerator:
         """Extract metrics and statistics from the article."""
         metrics = []
         
-        # Look for percentages
-        percentages = re.findall(r'(\d+%\s+[^.!?\n]+)', self.article_content)
-        metrics.extend(percentages[:3])
+        # Look for percentages with context
+        percentages = re.findall(r'(\d+%\s+[^.!?\n|]+)', self.article_content)
+        # Filter out table fragments and markdown
+        filtered_pct = [m.strip() for m in percentages 
+                       if 10 < len(m.strip()) < 150
+                       and '|' not in m
+                       and not m.strip().startswith('#')
+                       and not m.strip().startswith('*')]
+        metrics.extend(filtered_pct[:3])
         
         # Look for cost/time savings
-        savings = re.findall(r'(\$\d+[KkMm]?\s+[^.!?\n]+)', self.article_content)
-        metrics.extend(savings[:2])
+        savings = re.findall(r'(\$\d+[KkMm]?\s+[^.!?\n|]+)', self.article_content)
+        filtered_savings = [m.strip() for m in savings 
+                           if 10 < len(m.strip()) < 150
+                           and '|' not in m]
+        metrics.extend(filtered_savings[:2])
         
         # Look for improvement metrics
-        improvements = re.findall(r'(\d+x\s+[^.!?\n]+)', self.article_content)
-        metrics.extend(improvements[:2])
+        improvements = re.findall(r'(\d+x\s+[^.!?\n|]+)', self.article_content)
+        filtered_imp = [m.strip() for m in improvements 
+                       if 10 < len(m.strip()) < 150
+                       and '|' not in m]
+        metrics.extend(filtered_imp[:2])
         
         return metrics[:5]  # Return first 5 metrics
     
@@ -217,7 +248,7 @@ What's your experience with this? Share your thoughts below! 👇
 
 🔧 **Technical Deep-Dive: {self.metadata['title']}**
 
-After {self.metadata['estimated_read_time']} months of research and implementation, I've documented my journey building [system/solution].
+After extensive research and implementation, I've documented my journey building [describe your system/solution].
 
 **The Technical Challenge:**
 
